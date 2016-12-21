@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>微博分享</title>
+<style>
+.container{margin:20px auto;max-width:600px;word-wrap:break-word;}
+label{display:block;margin:10px 0;width:100%;}
+label span{display:inline-block;width:70px;vertical-align:top;line-height:30px;}
+label input, label textarea{width:calc(100% - 100px);line-height:20px;padding:5px;}
+label img{max-width:300px;max-height:300px;}
+</style>
+</head>
+<body>
+<div class="container">
+	<h1>微博分享</h1>
+	<p><a href="" target="_blank" id="gotourl"></a></p>
+	<label title="超链接">
+		<span>链接：</span>
+		<input type="text" id="url" onchange="setLink()" placeholder="超链接">
+	</label>
+	<label title="微博正文">
+		<span>正文：</span>
+		<textarea id="content" onchange="setLink()" placeholder="微博正文" rows="3" cols="10"></textarea>
+	</label>
+	<label title="配图">
+		<span>配图：</span>
+		<input type="text" id="img" onchange="setLink()" placeholder="http://ww1.sinaimg.cn/mw690/478fb89ctw1e2wktul3raj.jpg">
+	</label>
+	<label>
+		<span></span>
+		<img src="http://ww1.sinaimg.cn/mw690/478fb89ctw1e2wktul3raj.jpg" id="preview">
+	</label>
+</div>
+<script>
+var gotourl = document.getElementById('gotourl'), url = document.getElementById('url'), content = document.getElementById('content'), img = document.getElementById('img'), preview = document.getElementById('preview');
+function setLink(){
+	gotourl.innerHTML = gotourl.href = ('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(url.value || 'http://pauli.cn') + '&title=' + encodeURI(content.value || '分享') + '&pic=' + encodeURIComponent(img.value || ''));
+	preview.src = img.value || '';
+}
+</script>
+</body>
+</html>
