@@ -7,6 +7,7 @@
 .container{margin:20px auto;max-width:600px;}
 table{width:100%;}
 #colorList td{padding:2px;border-top:1px solid #CCC;}
+#colorList tr:hover{background-color:#EEE;}
 </style>
 </head>
 <body>
@@ -18,25 +19,25 @@ table{width:100%;}
     <td colspan="3"><h2>RGB颜色转换为十六进制颜色：</h2></td>
   </tr>
   <tr>
-    <td width="400">
-      <input name="r1e" value="255" size="3" maxlength="3">
-      <input name="r1e" value="180" size="3" maxlength="3">
-      <input name="r1e" value="0" size="3" maxlength="3">
+    <td width="300">
+      <input onkeyup="utils.showRGB(1)" name="r1e" value="255" size="3" maxlength="3">
+      <input onkeyup="utils.showRGB(1)" name="r1e" value="180" size="3" maxlength="3">
+      <input onkeyup="utils.showRGB(1)" name="r1e" value="0" size="3" maxlength="3">
       <input onclick="utils.showRGB()" type="button" value="转换" name="button">
     </td>
-    <td id="color1" width="100"></td>
-    <td width="100"><div id="a_mo2" style="color: black; font-size:14px;"></div></td>
+    <td id="color1" width="100">&nbsp;</td>
+    <td width="140"><div id="a_mo2" style="color: black; font-size:14px;"></div></td>
   </tr>
   <tr>
     <td colspan="3"><h2>十六进制颜色转换为RGB颜色：</h2></td>
   </tr>
   <tr>
-    <td width="400">
-      <input id="rgb2" value="#CC00FF" size="8" maxlength="7">
+    <td width="300">
+      <input onkeyup="utils.showHex(1)" id="rgb2" value="#CC00FF" size="8" maxlength="7">
       <input onclick="utils.showHex()" type="button" value="转换" name="button">
     </td>
-    <td id="color2" width="100"></td>
-    <td width="100"><div id="a_mo3" style="color: black; font-size:14px; ">　</div></td>
+    <td id="color2" width="100">&nbsp;</td>
+    <td width="140"><div id="a_mo3" style="color: black; font-size:14px; ">　</div></td>
   </tr>
 </table>
 <h2>十六进制颜色查询</h2>
@@ -55,25 +56,25 @@ table{width:100%;}
 ~function(win){
 
 win.utils = {};
-win.utils.showRGB = function() {
+win.utils.showRGB = function(silent) {
     var r1e = [], r1eNodes = document.getElementsByTagName('input');
 	for (var i = 0; i < r1eNodes.length; i++) {
 		if (r1eNodes[i].name === 'r1e') {
 			r1e.push(r1eNodes[i]);
 		}
 	}
-    document.getElementById('color1').style.backgroundColor = document.getElementById('a_mo2').innerText = '#' + (rgb2hex(r1e) || '');
+    document.getElementById('color1').style.backgroundColor = document.getElementById('a_mo2').innerText = '#' + (rgb2hex(r1e, silent) || '');
 };
 
-function rgb2hex(rgb){
+function rgb2hex(rgb, silent){
 	var hex = '', x, c = '0123456789ABCDEF';
 	for (i = 0; i < 3; i++) {;
         var n = rgb[i].value || '0';
         if (parseInt(n) != n) {
-			return alert('请输入数字！');
+			return silent || alert('请输入数字！');
 		}
         if (n > 255) {
-			return alert('数字在0-255之间！');
+			return silent || alert('数字在0-255之间！');
 		}
         var a = n % 16, b = c.substr(a, 1);
 		a = (n - a) / 16;
@@ -82,7 +83,7 @@ function rgb2hex(rgb){
 	return hex;
 }
 
-win.utils.showHex = function() {
+win.utils.showHex = function(silent) {
     var a = document.getElementById('rgb2').value, b = [];
     if (a.substr(0, 1) == '#') {
 		a = a.substring(1);
@@ -91,7 +92,7 @@ win.utils.showHex = function() {
 		a = a.split('');
 		a = a[0] + a[0] + a[1] + a[1] + a[2] + a[2];
 	} else if (a.length !== 6) {
-		return alert('请输入正确的十六进制颜色码！');
+		return silent || alert('请输入正确的十六进制颜色码！');
 	}
 	document.getElementById('color2').style.backgroundColor = '#' + a;
     document.getElementById('a_mo3').innerText = 'RGB(' + (hex2rgb(a) || '') + ')';
