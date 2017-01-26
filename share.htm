@@ -35,7 +35,7 @@ label img{max-width:300px;max-height:300px;}
 <script>
 var gotourl = document.getElementById('gotourl'), url = document.getElementById('url'), content = document.getElementById('content'), img = document.getElementById('img'), preview = document.getElementById('preview');
 function setLink(){
-	gotourl.innerHTML = gotourl.href = ('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(url.value || 'http://pauli.cn') + '&title=' + encodeURI(content.value || '分享') + '&pic=' + encodeURIComponent(img.value || ''));
+	gotourl.innerHTML = gotourl.href = ('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(url.value || 'http://pauli.cn') + '&title=' + encodeURIComponent(content.value || '分享') + '&pic=' + encodeURIComponent(img.value || ''));
 	preview.src = img.value || '';
 }
 </script>
