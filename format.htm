@@ -2,22 +2,34 @@
 <html id="html">
 <head>
 <title>Code format</title>
-<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
 <style type="text/css" id="css">
 /* here is css code */
-.controls {margin: 10px 0;}
-.form-control {resize: vertical;}
-@media (min-width: 1000px) {
-.controls {margin-top: -48px;}
-.form-control {margin-top: 10px;}
-}
+body{line-height:24px;font-size:14px;color:#333;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
+h1{padding-bottom:9px;border-bottom:1px solid #ddd;}
+a{color:#428bca;text-decoration:none;}
+.hide{display:none;}
+.container{margin:0 auto;width:calc(100% - 10px);max-width:1000px;}
+.controls{margin-bottom:10px;float:right;}
+.nav{padding-left:0;list-style:none;border-bottom:1px solid #ddd;}
+.nav:after{display:block;content:"";width:0;height:0;clear:both;}
+.nav li{float:left;margin-bottom:-1px;}
+.nav a{position:relative;display:block;padding:10px 15px;}
+.nav li.active a{margin-right:2px;color:#555;cursor:default;background-color:#fff;border:1px solid #ddd;border-bottom-color:transparent;}
+.btn{padding:6px 12px;font-size:14px;line-height:20px;text-align:center;cursor:pointer;user-select:none;border:none;}
+.btn-success{color:#fff;background-color:#5cb85c;}
+.btn-warning{color:#fff;background-color:#f0ad4e;}
+.btn-info{color:#fff;background-color:#5bc0de;}
+.btn-success:hover{color:#fff;background-color:#449d44;}
+.btn-warning:hover{color:#fff;background-color:#ec971f;}
+.btn-info:hover{color:#fff;background-color:#31b0d5;}
+.form-control{resize:vertical;display:block;width:calc(100% - 25px);height:34px;padding:6px 12px;font-size:14px;color:#555;background-color:#fff;border:1px solid #ccc;height:auto;}
 </style>
 </head>
 <body>
 <!-- Juest Test -->
 <div class="container">
-	<h1 class="page-header">Code format</h1>
-	<ul class="nav nav-tabs">
+	<h1>Code format</h1>
+	<ul class="nav">
 		<li><a href="javascript:void(0)" ng-click="Code.type='html'">HTML</a></li>
 		<li><a href>JS</a></li>
 		<li><a href>CSS</a></li>
@@ -65,7 +77,7 @@
 <script type="text/javascript" id="js">
 // here is js code
 ~function(){
-	var format, textarea = document.body.querySelector('.form-control'), tabs = query2('.nav-tabs a'), btns = query2('.controls button');
+	var format, textarea = document.body.querySelector('.form-control'), tabs = query2('.nav a'), btns = query2('.controls button');
     tabs.map(function(a){
     	a.onclick = function(e){
 	    	e.preventDefault();
