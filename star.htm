@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<style type="text/css">
+.container{
+    position: relative;
+    display: inline-block;
+    background-color: #EEE;
+    width: 96px;
+    height: 20px;
+    overflow: hidden;
+    word-spacing: -4px;
+    padding-right: 4px;
+}
+input {
+    opacity: 0;
+    z-index: 10;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+input:checked~span, .container input:hover~span {
+    background-color:#CCC;
+}
+input:checked+span, .container input:hover+span, .container:hover span {
+    background-color:#F00;
+}
+input:first-child {
+    display: none;
+}
+span {
+    background-color: #F00;
+    margin-left: -20px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    z-index: 0;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <input type="radio" name="star" checked="checked" value="0">
+    <input type="radio" name="star" value="1">
+    <span>1</span>
+    <input type="radio" name="star" value="2">
+    <span>2</span>
+    <input type="radio" name="star" value="3">
+    <span>3</span>
+    <input type="radio" name="star" value="4">
+    <span>4</span>
+    <input type="radio" name="star" value="5">
+    <span>5</span>
+</div>
+</body>
+</html>
