@@ -4,40 +4,47 @@
 <title>test</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style type="text/css">
-.container{
+.container {
+    margin: 30px auto;
+    text-align: center;
+}
+.stars {
     position: relative;
     display: inline-block;
-    background-color: #EEE;
-    height: 20px;
+    color: #EEE;
+    height: 40px;
     overflow: hidden;
     word-spacing: -4px;
+    border: 1px solid #CCC;
 }
 input {
     opacity: 0;
     z-index: 10;
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
     cursor: pointer;
     padding: 0;
     margin: 0;
     border: 0;
 }
-input:checked~span, .container input:hover~span {
-    background-color:#CCC;
+input:checked~span, .stars input:hover~span {
+    color:#CCC;
 }
-input:checked+span, .container input:hover+span, .container:hover span {
-    background-color:#F00;
+input:checked+span, .stars input:hover+span, .stars:hover span {
+    color:#F00;
 }
 input:first-child {
     display: none;
 }
 span {
-    background-color: #F00;
-    margin-left: -20px;
-    width: 20px;
-    height: 20px;
+    color: #F00;
+    margin-left: -40px;
+    width: 40px;
+    height: 40px;
+    line-height: 46px;
+    font-size: 34px;
     display: inline-block;
     position: absolute;
     z-index: 0;
@@ -46,19 +53,36 @@ span {
 </style>
 </head>
 <body>
-<h1>Pure star rates</h1>
+<h1 class="container">Pure star rates</h1>
 <div class="container">
-    <input type="radio" name="star" checked="checked" value="0">
-    <input type="radio" name="star" value="1">
+<div class="stars">
+    <input type="radio" name="star1" checked="checked" value="0">
+    <input type="radio" name="star1" value="1">
     <span>1</span>
-    <input type="radio" name="star" value="2">
+    <input type="radio" name="star1" value="2">
     <span>2</span>
-    <input type="radio" name="star" value="3">
+    <input type="radio" name="star1" value="3">
     <span>3</span>
-    <input type="radio" name="star" value="4">
+    <input type="radio" name="star1" value="4">
     <span>4</span>
-    <input type="radio" name="star" value="5">
+    <input type="radio" name="star1" value="5">
     <span>5</span>
+</div>
+</div>
+<div class="container">
+<div class="stars">
+    <input type="radio" name="star2" checked="checked" value="0">
+    <input type="radio" name="star2" value="1">
+    <span>*</span>
+    <input type="radio" name="star2" value="2">
+    <span>*</span>
+    <input type="radio" name="star2" value="3">
+    <span>*</span>
+    <input type="radio" name="star2" value="4">
+    <span>*</span>
+    <input type="radio" name="star2" value="5">
+    <span>*</span>
+</div>
 </div>
 </body>
 </html>
