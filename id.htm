@@ -9,8 +9,9 @@
 <style>
 .container {max-width: 800px; margin: 20px auto; line-height: 30px;}
 input, button {margin: 5px; padding: 5px;}
-button{width: 100px;}
+button{width: 100px; cursor:pointer;}
 input{min-width: 180px;}
+.pull-right{float:right;}
 @media (max-width: 800px){
   input {width: calc(100% - 40px);}
 }
@@ -18,7 +19,7 @@ input{min-width: 180px;}
 </head>
 <body>
 <div class="container">
-  <h1>随机证件号</h1>
+  <h1>随机证件号<button class="pull-right" onclick="getRandomAll()">刷新</button></h1>
   <hr>
   <button onclick="getNames()">姓名</button><input type="text" name="client_name"><input type="text" name="client_name"><input type="text" name="client_name">
   <hr>
@@ -26,8 +27,11 @@ input{min-width: 180px;}
   <hr>
   <button onclick="getId_nos()">身份证</button><input type="text" name="id_no"><input type="text" name="id_no"><input type="text" name="id_no">
   <hr>
-  <button onclick="getBank_accounts()">银行卡</button>
+  <button onclick="getBanks()">银行卡</button>
   <input type="text" name="bank_account"><input type="text" name="bank_account"><input type="text" name="bank_account">
+  <hr>
+  <button onclick="getPasswords()">密码</button>
+  <input type="text" name="password"><input type="text" name="password"><input type="text" name="password">
   <hr>
 <script>
 // 生成随机姓名
@@ -116,6 +120,7 @@ input{min-width: 180px;}
   }
 
   var addresses = [130108,130121,130122,130123,130124,130125,130126,130127,130128,130129,130130,130131,130132,130133,130181,130182,130183,130184,130185,130201,130202,130203,130204,130205,130206,130207,130208,130221,130222,130223,130224,130225,130226,130227,130228,130229,130230,130281,130282,130283,130301,130302,130303,130304,130321,130322,130323,130324,130401,130402,130403,130404,130405,130406,130421,130422,130423,130424,130425,130426,130427,130428,130429,130430,130431,130432,130433,130434,130435,130481,130501,130502,130503,130521,130522,130523,130524,130525,130526,130527,130528,130529,130530,130531,130532,130533,130534,130535,130581,130582,130601,130602,130603,130604,130621,130622,130623,130624,130625,130626,130627,130628,130629,130630,130631,130632,130633,130634,420101];
+
 // 生成随机身份证号
   function getId_no(){
     var coefficientArray = [ "7","9","10","5","8","4","2","1","6","3","7","9","10","5","8","4","2"];// 加权因子
@@ -141,7 +146,7 @@ input{min-width: 180px;}
 
   var banks = [622202, 622848, 622700, 622262, 621661, 622666, 622622, 622556, 622588, 622155, 622689, 622630, 622630, 622908, 621717, 622323, 622309];
 //生成随机银行卡号
-  function getBank_account() {
+  function getBank() {
     var prefix = banks[Math.floor(Math.random() * banks.length)] + '';
     for (var j = 0; j < 13; j++) {
       prefix = prefix + Math.floor(Math.random() * 10);
@@ -149,18 +154,49 @@ input{min-width: 180px;}
     return  prefix;
   }
   
-  function getBank_accounts() {
+  function getBanks() {
     var y = document.getElementsByName("bank_account");
     for (var i = 0; i < y.length; i++) {
       var o = y[i];
-      o.value = getBank_account();
+      o.value = getBank();
     }
   }
 
-getNames();
-getMobles();
-getId_nos();
-getBank_accounts();
+  function getPasswords() {
+    var y = document.getElementsByName("password");
+    for (var i = 0; i < y.length; i++) {
+      var o = y[i];
+      o.value = getPassword();
+    }
+  }
+  function getPassword(length, special) {
+    var iteration = 0;
+    var password = "";
+    var randomNumber;
+    while(iteration < (length || 10)){
+      randomNumber = (Math.floor((Math.random() * 100)) % 94) + 33;
+      if(!special){
+        if ((randomNumber >=33) && (randomNumber <=47)) { continue; }
+        if ((randomNumber >=58) && (randomNumber <=64)) { continue; }
+        if ((randomNumber >=91) && (randomNumber <=96)) { continue; }
+        if ((randomNumber >=123) && (randomNumber <=126)) { continue; }
+      }
+      iteration++;
+      password += String.fromCharCode(randomNumber);
+    }
+    return password;
+  }
+  
+  function getRandomAll(){
+    getNames();
+    getMobles();
+    getId_nos();
+    getBanks();
+    getPasswords();
+  }
+
+  getRandomAll();
+
 </script>
 </body>
 </html>
