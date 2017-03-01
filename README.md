@@ -8,3 +8,4 @@ tools for web development
 - Colors: <http://pauli.cn/tool/color.htm>
 - Pure CSS rate: <http://pauli.cn/tool/rating.htm>
 - Markdown: <http://pauli.cn/tool/md.htm>
+- ID generator: <http://pauli.cn/tool/id.htm>
