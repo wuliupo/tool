@@ -8,17 +8,17 @@ var Format = window.Format = window.Format || function (type){
 Format.noop = function(data){
 	return data;
 };
-Format.prototype.format = Format.noop;
-Format.prototype.compress = function(data){
+Format.prototype.func1 = Format.noop;	// format
+Format.prototype.func2 = function(data){	// compress
     return data.replace(/([\r\n]+|\/\*.*?\*\/)/g, '').replace(/[\t\s]+/g, ' ').replace(/\s*([=,:;<>\{\}])\s*/g, '$1');
 };
-Format.prototype.demo = function(){
-	return (document.getElementById(this.type) || {}).innerHTML;
+Format.prototype.loadDemo = function(){
+	return (document.getElementById(this.type) || {}).outerHTML;
 };
-Format.regist = function(name, format, compress){
+Format.regist = function(name, func1, func2){
 	var instant = Format[name] = new Format(name);
-	instant.format = format || instant.format;
-	instant.compress = compress || instant.compress;
+	instant.func1 = func1 || instant.func1;
+	instant.func2 = func2 || instant.func2;
 };
 Format.get = function(name){
 	return Format[name] || new Format();
@@ -27,7 +27,12 @@ Format.get = function(name){
 Format.regist('css', cssbeautify);
 Format.regist('js', js_beautify);
 Format.regist('json', js_beautify);
+Format.regist('jade', function(html, cb){
+	Html2Jade.convertHtml(html, {}, function (err, jade) {
+		cb(jade);
+	});
+});
 Format.regist('html', style_html);
-Format.regist('markdown', new Markdown.Converter().makeHtml);
+Format.regist('markdown', toMarkdown, new Markdown.Converter().makeHtml);
 
 }();

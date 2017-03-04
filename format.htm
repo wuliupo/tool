@@ -22,28 +22,30 @@ a{color:#428bca;text-decoration:none;}
 .btn-success:hover{color:#fff;background-color:#449d44;}
 .btn-warning:hover{color:#fff;background-color:#ec971f;}
 .btn-info:hover{color:#fff;background-color:#31b0d5;}
+.btn:empty{display:none;}
 .form-control{resize:vertical;display:block;width:calc(100% - 25px);height:34px;padding:6px 12px;font-size:14px;color:#555;background-color:#fff;border:1px solid #ccc;height:auto;}
 </style>
 </head>
 <body>
 <!-- Juest Test -->
-<div class="container">
+<div class="container" id="jade">
 	<h1>Code format</h1>
-	<ul class="nav">
-		<li><a href="javascript:void(0)" ng-click="Code.type='html'">HTML</a></li>
-		<li><a href>JS</a></li>
-		<li><a href>CSS</a></li>
-		<li><a href>Java</a></li>
-		<li><a href>PHP</a></li>
-		<li><a href>JSON</a></li>
-		<li><a href>XML</a></li>
-		<li><a href>SQL</a></li>
-		<li><a href>Markdown</a></li>
+	<ul class="nav" id="markdown">
+		<li><a href func1="Format" func2="Compress">HTML</a></li>
+		<li><a href func1="Format" func2="Compress">JS</a></li>
+		<li><a href func1="Format" func2="Compress">CSS</a></li>
+		<li><a href func1="Format" func2="Compress">Java</a></li>
+		<li><a href func1="Format" func2="Compress">PHP</a></li>
+		<li><a href func1="Format" func2="Compress">JSON</a></li>
+		<li><a href func1="Format" func2="Compress">XML</a></li>
+		<li><a href func1="Format" func2="Compress">SQL</a></li>
+		<li><a href func1="to Markdown" func2="to HTML">Markdown</a></li>
+		<li><a href func1="to Jade" func2="to HTML">Jade</a></li>
 	</ul>
 	<div class="pull-right controls">
-		<button type="button" class="btn btn-info">Demo</button>
-		<button type="button" class="btn btn-warning">Compress</button>
-		<button type="button" class="btn btn-success">Format</button>
+		<button type="button" class="btn btn-info" func="loadDemo">Demo</button>
+		<button type="button" class="btn btn-success" func="func1">Format</button>
+		<button type="button" class="btn btn-warning" func="func2">Compress</button>
 	</div>
 	<textarea class="form-control" rows="20"></textarea>
 	<h3>Reference</h3>
@@ -55,10 +57,11 @@ a{color:#428bca;text-decoration:none;}
 		<li><a href="https://github.com/victorporof/Sublime-HTMLPrettify" target="_blank">https://github.com/victorporof/Sublime-HTMLPrettify</a></li>
 		<li><a href="http://tool.lu/php" target="_blank">http://tool.lu/php</a></li>
 		<li><a href="http://www.cnblogs.com/dolphinX/p/3486214.html" target="_blank">Regexp</a></li>
+		<li><a href="http://html2jade.org" target="_blank">HTML 2 Jade</a></li>
 	</ul>
 </div>
 <div class="hide">
-<div id="markdown">
+<pre id="markdown">
 # 这个是一级标题
 
 ### Header 3
@@ -68,12 +71,18 @@ a{color:#428bca;text-decoration:none;}
 > This is the second paragraph in the blockquote. ``` var flag = true ``` sample code.
 >
 > ## This is an H2 in a [blockquote](http://pauli.cn)
-</div>
+</pre>
+
 <script type="text/javascript" src="./cssbeautify.js"></script>
 <script type="text/javascript" src="./jsbeautify.js"></script>
 <script type="text/javascript" src="./beautify-html.js"></script>
 <script type="text/javascript" src="./Markdown.Converter.js"></script>
+<script type="text/javascript" src="./he.js"></script>
+<script type="text/javascript" src="./html2markdown.js"></script>
+<script type="text/javascript" src="./html2jade.js"></script>
+<script type="text/javascript" src="./marked.js"></script>
 <script type="text/javascript" src="./format.js"></script>
+<script src="html2markdown.js"></script>
 <script type="text/javascript" id="js">
 // here is js code
 ~function(){
@@ -86,7 +95,7 @@ a{color:#428bca;text-decoration:none;}
 	    		a1.parentNode.className = '';
     		});
     		this.parentNode.className = 'active';
-	       	format = Format.get(getText(this));
+	       	format = Format.get(getFunc(this));
     	};
     });
     tabs[0].click();
@@ -94,7 +103,9 @@ a{color:#428bca;text-decoration:none;}
     	button.onclick = function(e){
 	    	e.preventDefault();
 	    	e.stopPropagation();
-    		textarea.value = format[getText(this)](textarea.value || '');
+    		textarea.value = format[getFunc(this)](textarea.value || '', function(val){
+					textarea.value = val;
+				}) || textarea.value;
     	};
     });
     btns[0].click();
@@ -103,8 +114,8 @@ a{color:#428bca;text-decoration:none;}
     	return Array.prototype.slice.call(document.body.querySelectorAll(selector));
     }
 
-    function getText(dom){
-    	return (dom.innerText || dom.textContent || '').toLowerCase();
+    function getFunc(dom){
+    	return dom.getAttribute('func') || (dom.innerText || dom.textContent || '').toLowerCase();
     }
 }();
 </script>

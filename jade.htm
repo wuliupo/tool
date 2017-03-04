@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Jade</title>
+</head>
+<body>
+<textarea name="name" rows="8" cols="80">
+</textarea>
+<button onclick="dohtml2jade()">Convert</button>
+  <script src="html2markdown.js"></script>
+  <script>
+  var textarea = document.getElementsByTagName('textarea')[0];
+  textarea.value = document.body.innerHTML;
+  function dohtml2jade() {
+    textarea.value = toMarkdown(textarea.value);
+  }
+  </script>
+</body>
+</html>
