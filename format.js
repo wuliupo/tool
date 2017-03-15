@@ -28,7 +28,12 @@ Format.regist('css', cssbeautify);
 Format.regist('js', js_beautify);
 Format.regist('json', js_beautify);
 Format.regist('jade', function(html, cb){
-	Html2Jade.convertHtml(html, {}, function (err, jade) {
+	Html2Jade.convertHtml(html, {
+		tabs: false,
+		nspaces: 4,
+		donotencode: true,
+		bodyless: !(/<html>/i).test(html),
+	}, function (err, jade) {
 		cb(jade);
 	});
 });
