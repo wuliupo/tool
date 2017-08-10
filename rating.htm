@@ -11,13 +11,12 @@ h1 {
 }
 .container {
     margin: 30px auto;
-    max-width: 205px;
+    max-width: 225px;
     text-align: center;
 }
 /* method 1: use parent & hover */
 .stars {
     position: relative;
-    display: inline-block;
     margin: 20px 0;
     color: #EEE;
     height: 40px;
@@ -37,10 +36,10 @@ h1 {
     margin: 0;
     border: 0;
 }
-input:checked~span, .stars input:hover~span {
+input:checked~span, .container .stars input:hover~span {
     color:#CCC;
 }
-.stars input:checked+span, .stars input:hover+span, .stars:hover span {
+.stars input:checked+span, .container .stars input:hover+span, .container .stars:hover span {
     color:#F00;
 }
 .stars input:first-child {
