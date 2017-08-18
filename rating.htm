@@ -68,6 +68,21 @@ input:checked~span, .container .stars input:hover~span {
 .rating span:hover, .rating span:hover ~ span {
     color: #e3cf7a;
 }
+
+.enhance span {
+    position: relative;
+}
+.enhance span:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: -4px;
+    z-index: 1;
+}
+.enhance span:hover:after, .enhance span:hover ~ span:after {
+    content: "★";
+}
 </style>
 </head>
 <body>
@@ -103,6 +118,14 @@ input:checked~span, .container .stars input:hover~span {
 </div>
 
 <div class="rating">
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+</div>
+
+<div class="rating enhance">
     <span>☆</span>
     <span>☆</span>
     <span>☆</span>
