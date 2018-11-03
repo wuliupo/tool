@@ -2,6 +2,8 @@
 <html>
 <head>
 <title>Pure star rates</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <style type="text/css">
 h1 {
@@ -9,18 +11,20 @@ h1 {
 }
 .container {
     margin: 30px auto;
+    max-width: 225px;
     text-align: center;
 }
+/* method 1: use parent & hover */
 .stars {
     position: relative;
-    display: inline-block;
+    margin: 20px 0;
     color: #EEE;
     height: 40px;
     overflow: hidden;
     word-spacing: -4px;
     border: 1px solid #CCC;
 }
-input {
+.stars input {
     opacity: 0;
     z-index: 10;
     position: relative;
@@ -32,16 +36,16 @@ input {
     margin: 0;
     border: 0;
 }
-input:checked~span, .stars input:hover~span {
+input:checked~span, .container .stars input:hover~span {
     color:#CCC;
 }
-input:checked+span, .stars input:hover+span, .stars:hover span {
+.stars input:checked+span, .container .stars input:hover+span, .container .stars:hover span {
     color:#F00;
 }
-input:first-child {
+.stars input:first-child {
     display: none;
 }
-span {
+.stars span {
     color: #F00;
     margin-left: -40px;
     width: 40px;
@@ -53,11 +57,39 @@ span {
     z-index: 0;
     text-align: center;
 }
+/* method 2: use bidi & direction */
+.rating {
+    margin: 20px 0;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    font-size: 30px;
+    cursor: pointer;
+    border: 1px solid #CCC;
+}
+.rating span:hover, .rating span:hover ~ span {
+    color: #e3cf7a;
+}
+
+.enhance span {
+    position: relative;
+}
+.enhance span:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: -4px;
+    z-index: 1;
+}
+.enhance span:hover:after, .enhance span:hover ~ span:after {
+    content: "★";
+}
 </style>
 </head>
 <body>
-<h1 class="container">Pure CSS rates</h1>
 <div class="container">
+<h1>Pure CSS rates</h1>
+
 <div class="stars">
     <input type="radio" name="star1" checked="checked" value="0">
     <input type="radio" name="star1" value="1">
@@ -71,8 +103,7 @@ span {
     <input type="radio" name="star1" value="5">
     <span>5</span>
 </div>
-</div>
-<div class="container">
+
 <div class="stars">
     <input type="radio" name="star2" checked="checked" value="0">
     <input type="radio" name="star2" value="1">
@@ -86,6 +117,23 @@ span {
     <input type="radio" name="star2" value="5">
     <span>*</span>
 </div>
+
+<div class="rating">
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+</div>
+
+<div class="rating enhance">
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+</div>
+
 </div>
 </body>
 </html>
