@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON 格式化</title>
+    <style>
+        * {box-sizing: border-box;}
+        .container {margin: 10px auto; padding: 10px; max-width: 800px;}
+        button, textarea {outline: none; background-color: #FFF; border: 1px solid #CCC; border-radius: 4px;}
+        button {margin-top: -60px; float: right; padding: 10px 20px; width: 80px; text-align: center; cursor: pointer;}
+        textarea {padding: 10px; width: 100%; min-height: 400px; font-size: 14px; line-height: 20px; resize: vertical;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON 格式化</h1>
+        <button id="btn">格式化</button>
+        <textarea name="" id="content" cols="30" rows="10"></textarea>
+    </div>
+
+    <script>
+        var btn = document.getElementById('btn'), content = document.getElementById('content'), isJson = false;
+        content.value = '{"name": "pauli", "age": 35, "message": "do something you can be proud of", "motto": "自己不努力，没人会帮你"}';
+        btn.onclick = function() {
+            try {
+                content.value = JSON.stringify(JSON.parse(content.value), null, isJson ? 0 : 4);
+            } catch (err) {}
+            btn.innerHTML = isJson ? '格式化' : '压缩';
+            isJson = !isJson;
+        };
+    </script>
+</body>
+</html>
