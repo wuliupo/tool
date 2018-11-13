@@ -4,13 +4,13 @@
 <title>RGB颜色转换十六进制颜色</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
-.container{margin:20px auto;max-width:600px;}
+.container{margin:20px auto;padding:20px;max-width:600px;background-color:#FFF;}
 table{width:100%;}
 #colorList td{padding:2px;border-top:1px solid #CCC;}
 #colorList tr:hover{background-color:#EEE;}
 </style>
 </head>
-<body>
+<body onclick="utils.randomColor(this)">
 <div class="container">
 <h1>RGB颜色转换十六进制颜色</h1>
 <hr/>
@@ -56,59 +56,66 @@ table{width:100%;}
 ~function(win){
 
 win.utils = {};
+win.utils.randomColor = function(obj) {
+  var randomColor = Math.floor(Math.random()*16777215).toString(16);
+  if (obj) {
+    obj.style.backgroundColor = '#' + randomColor;
+  }
+  return randomColor;
+};
 win.utils.showRGB = function(silent) {
-    var r1e = [], r1eNodes = document.getElementsByTagName('input');
-	for (var i = 0; i < r1eNodes.length; i++) {
-		if (r1eNodes[i].name === 'r1e') {
-			r1e.push(r1eNodes[i]);
-		}
-	}
-    document.getElementById('color1').style.backgroundColor = document.getElementById('a_mo2').innerText = '#' + (rgb2hex(r1e, silent) || '');
+  var r1e = [], r1eNodes = document.getElementsByTagName('input');
+  for (var i = 0; i < r1eNodes.length; i++) {
+    if (r1eNodes[i].name === 'r1e') {
+      r1e.push(r1eNodes[i]);
+    }
+  }
+  document.getElementById('color1').style.backgroundColor = document.getElementById('a_mo2').innerText = '#' + (rgb2hex(r1e, silent) || '');
 };
 
 function rgb2hex(rgb, silent){
-	var hex = '', x, c = '0123456789ABCDEF';
-	for (i = 0; i < 3; i++) {;
-        var n = rgb[i].value || '0';
-        if (parseInt(n) != n) {
-			return silent || alert('请输入数字！');
-		}
-        if (n > 255) {
-			return silent || alert('数字在0-255之间！');
-		}
-        var a = n % 16, b = c.substr(a, 1);
-		a = (n - a) / 16;
-        hex += c.substr(a, 1) + b;
+  var hex = '', x, c = '0123456789ABCDEF';
+  for (i = 0; i < 3; i++) {;
+    var n = rgb[i].value || '0';
+    if (parseInt(n) != n) {
+      return silent || alert('请输入数字！');
     }
-	return hex;
+    if (n > 255) {
+      return silent || alert('数字在0-255之间！');
+    }
+    var a = n % 16, b = c.substr(a, 1);
+    a = (n - a) / 16;
+    hex += c.substr(a, 1) + b;
+  }
+  return hex;
 }
 
 win.utils.showHex = function(silent) {
-    var a = document.getElementById('rgb2').value, b = [];
-    if (a.substr(0, 1) == '#') {
-		a = a.substring(1);
-	}
-    if (a.length === 3) {
-		a = a.split('');
-		a = a[0] + a[0] + a[1] + a[1] + a[2] + a[2];
-	} else if (a.length !== 6) {
-		return silent || alert('请输入正确的十六进制颜色码！');
-	}
-	document.getElementById('color2').style.backgroundColor = '#' + a;
-    document.getElementById('a_mo3').innerText = 'RGB(' + (hex2rgb(a) || '') + ')';
+  var a = document.getElementById('rgb2').value, b = [];
+  if (a.substr(0, 1) == '#') {
+    a = a.substring(1);
+  }
+  if (a.length === 3) {
+    a = a.split('');
+    a = a[0] + a[0] + a[1] + a[1] + a[2] + a[2];
+  } else if (a.length !== 6) {
+    return silent || alert('请输入正确的十六进制颜色码！');
+  }
+  document.getElementById('color2').style.backgroundColor = '#' + a;
+  document.getElementById('a_mo3').innerText = 'RGB(' + (hex2rgb(a) || '') + ')';
 }
 
 function hex2rgb(str){
-	var rgb = [], x;
-	str = str.toLowerCase();
-    for (x = 0; x < 3; x++) {
-        rgb[0] = str.substr(x * 2, 2);
-		rgb[3] = '0123456789abcdef';
-        rgb[1] = rgb[0].substr(0, 1);
-		rgb[2] = rgb[0].substr(1, 1);
-		rgb[20 + x] = rgb[3].indexOf(rgb[1]) * 16 + rgb[3].indexOf(rgb[2]);
-    }
-	return rgb[20] + ',' + rgb[21] + ',' + rgb[22];
+  var rgb = [], x;
+  str = str.toLowerCase();
+  for (x = 0; x < 3; x++) {
+    rgb[0] = str.substr(x * 2, 2);
+    rgb[3] = '0123456789abcdef';
+    rgb[1] = rgb[0].substr(0, 1);
+    rgb[2] = rgb[0].substr(1, 1);
+    rgb[20 + x] = rgb[3].indexOf(rgb[1]) * 16 + rgb[3].indexOf(rgb[2]);
+  }
+  return rgb[20] + ',' + rgb[21] + ',' + rgb[22];
 }
 win.utils.showRGB();
 win.utils.showHex();
@@ -254,7 +261,7 @@ var colors = [
 
 var str = '';
 for (var i = 0; i < colors.length; i++) {
-	str += '<tr><td style="background-color:#' + colors[i][2] + '">　</td><td>' + colors[i][0] + '</td><td>' + colors[i][1] + '</td><td>' + colors[i][2] + '</td><td>' + hex2rgb(colors[i][2]) + '</td></tr>'
+  str += '<tr><td style="background-color:#' + colors[i][2] + '">　</td><td>' + colors[i][0] + '</td><td>' + colors[i][1] + '</td><td>' + colors[i][2] + '</td><td>' + hex2rgb(colors[i][2]) + '</td></tr>'
 }
 document.getElementById('colorList').innerHTML = str;
 
