@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS获取浏览器窗口大小</title>
+    <style>
+        .container {margin: 20px auto; max-width: 800px; font-size: 14px;}
+        input { outline: none; color: #F00; outline: none; font-size: 16px; outline: none; padding: 0 10px; outline: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>JS获取浏览器窗口大小，获取屏幕，浏览器，网页高度宽度</h1>
+    <h2>请调整浏览器窗口大小</h2>
+    <hr>
+    <form action="#" method="get" name="form1" id="form1">
+        <!--显示浏览器窗口的实际尺寸-->
+        浏览器窗口 的 实际高度: <input type="text" name="availHeight" size="4"><br>
+        浏览器窗口 的 实际宽度: <input type="text" name="availWidth" size="4"><br>
+    </form>
+
+    <p>HTML精确定位: scrollLeft, scrollWidth, clientWidth, offsetWidth</p>
+    <ul>
+        <li>scrollHeight: 获取对象的滚动高度。</li>
+        <li>scrollLeft: 设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离</li>
+        <li>scrollTop: 设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离</li>
+        <li>scrollWidth: 获取对象的滚动宽度</li>
+        <li>offsetHeight: 获取对象相对于版面或由父坐标 offsetParent 属性指定的父坐标的高度</li>
+        <li>offsetLeft: 获取对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置</li>
+        <li>offsetTop: 获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置</li>
+        <li>event.clientX 相对文档的水平座标</li>
+        <li>event.clientY 相对文档的垂直座标</li>
+        <li>event.offsetX 相对容器的水平坐标</li>
+        <li>event.offsetY 相对容器的垂直坐标</li>
+        <li>document.documentElement.scrollTop 垂直方向滚动的值</li>
+        <li>event.clientX+document.documentElement.scrollTop 相对文档的水平座标+垂直方向滚动的量</li>
+    </ul>
+    <p>IE，FireFox 差异如下：</p>
+    <p>IE6.0、FF1.06+：</p>
+    <p>clientWidth = width + padding</p>
+    <p>clientHeight = height + padding</p>
+    <p>offsetWidth = width + padding + border</p>
+    <p>offsetHeight = height + padding + border</p>
+    <p>IE5.0/5.5：</p>
+    <p>clientWidth = width - border</p>
+    <p>clientHeight = height - border</p>
+    <p>offsetWidth = width</p>
+    <p>offsetHeight = height</p>
+    <p>(需要提一下：CSS中的margin属性，与clientWidth、offsetWidth、clientHeight、offsetHeight均无关)</p>
+    <ul>
+        <li>网页可见区域宽： document.body.clientWidth</li>
+        <li>网页可见区域高： document.body.clientHeight</li>
+        <li>网页可见区域宽： document.body.offsetWidth (包括边线的宽)</li>
+        <li>网页可见区域高： document.body.offsetHeight (包括边线的高)</li>
+        <li>网页正文全文宽： document.body.scrollWidth</li>
+        <li>网页正文全文高： document.body.scrollHeight</li>
+        <li>网页被卷去的高： document.body.scrollTop</li>
+        <li>网页被卷去的左： document.body.scrollLeft</li>
+        <li>网页正文部分上： window.screenTop</li>
+        <li>网页正文部分左： window.screenLeft</li>
+        <li>屏幕分辨率的高： window.screen.height</li>
+        <li>屏幕分辨率的宽： window.screen.width</li>
+        <li>屏幕可用工作区高度： window.screen.availHeight</li>
+        <li>屏幕可用工作区宽度： window.screen.availWidth</li>
+    </ul>
+    <p>－－－－－－－－－－－－－－－－－－－</p>
+    <p>技术要点</p>
+    <ul>
+        <li>本节代码主要使用了Document对象关于窗口的一些属性，这些属性的主要功能和用法如下。</li>
+        <li>要得到窗口的尺寸，对于不同的浏览器，需要使用不同的属性和方法：</li>
+        <li>若要检测窗口的真实尺寸，在Netscape下需要使用Window的属性；</li>
+        <li>在IE下需要深入Document内部对body进行检测；</li>
+        <li>在DOM环境下，若要得到窗口的尺寸，需要注意根元素的尺寸，而不是元素。</li>
+        <li>Window对象的innerWidth属性包含当前窗口的内部宽度。Window对象的innerHeight属性包含当前窗口的内部高度。</li>
+        <li>Document对象的body属性对应HTML文档的标签。Document对象的documentElement属性则表示HTML文档的根节点。</li>
+        <li>document.body.clientHeight表示HTML文档所在窗口的当前高度。document.body.clientWidth表示HTML文档所在窗口的当前宽度。</li>
+    </ul>
+
+    <script type="text/javascript">
+        var winWidth = 0;
+        var winHeight = 0;
+        function findDimensions() //函数：获取尺寸
+        {
+            //获取窗口宽度
+            if (window.innerWidth)
+                winWidth = window.innerWidth;
+            else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+            //获取窗口高度
+            if (window.innerHeight)
+                winHeight = window.innerHeight;
+            else if ((document.body) && (document.body.clientHeight))
+                winHeight = document.body.clientHeight;
+            //通过深入Document内部对body进行检测，获取窗口大小
+            if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
+                winHeight = document.documentElement.clientHeight;
+                winWidth = document.documentElement.clientWidth;
+            }
+            //结果输出至两个文本框
+            document.form1.availHeight.value = winHeight;
+            document.form1.availWidth.value = winWidth;
+        }
+        findDimensions();
+        //调用函数，获取数值
+        window.onresize = findDimensions;
+    </script>
+</div>
+</body>
+</html>
