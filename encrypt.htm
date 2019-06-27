@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>JavaScript加密解密</title>
+<style>
+.container {margin: 20px auto; max-width: 800px;}
+textarea {width: 100%; min-height: 200px; resize: vertical;}
+button {padding: 6px 10px; cursor: pointer; background: transparent;}
+button+button {margin-left: 20px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>JavaScript加密解密</h1>
+<textarea name="" id="textarea" cols="30" rows="10"></textarea>
+<p>
+<button onclick="doEncrypt('base64encode')">Base64加密</button>
+<button onclick="doEncrypt('base64decode')">Base64解密</button>
+<button onclick="doEncrypt('hex_md5')">MD5加密</button>
+<button onclick="doEncrypt('hex_sha1')">SHA1加密</button>
+</p>
+<script src="base64.js"></script>
+<script src="md5.js"></script>
+<script src="sha1.js"></script>
+<script type="text/javascript">
+function doEncrypt(type) {
+    var textarea = document.getElementById('textarea');
+    var value = textarea.value;
+    if (!value) {
+        return;
+    }
+    if (type === 'base64encode') {
+        value = new Base64().encode(value);
+    } else if (type === 'base64decode') {
+        value = new Base64().decode(value);
+    } else if (type === 'hex_md5') {
+        value = hex_md5(value);
+    } else if (type === 'hex_sha1') {
+        value = hex_sha1(value);
+    }
+    textarea.value = value;
+}
+</script>
+</div>
+</body>
+</html>
