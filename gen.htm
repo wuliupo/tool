@@ -23,6 +23,7 @@ button { width: 100px; cursor: pointer;}
 <div id="content"></div>
 </div>
 <script>
+let key = location.hash.replace('#', '');
 let 论述 = [
     "现在，解决主题的问题，是非常非常重要的。 所以， ",
     "我们不得不面对一个非常尴尬的事实，那就是， ",
@@ -200,8 +201,8 @@ function 增加段落(章节){
     return "　　" + 章节 + "。 "
 }
 
-function gen(){
-    key = document.getElementById('input').value
+function gen(val){
+    key = val || document.getElementById('input').value
     let 文章 = []
     for(let 空 in key){
         let 章节 = "";
@@ -227,11 +228,11 @@ function gen(){
     }
     let 排版 = "<div>" + 文章.join("</div><div>") + "</div>";
     document.getElementById("content").innerHTML = 排版;
-    location.hash = document.title = key;
+    location.hash = document.title = document.getElementById('input').value = key;
 }
-let key = location.hash.replace('#', '');
 if (key) {
-    gen();
+    key = decodeURIComponent(key);
+    gen(key);
 } else {
     key = "一天掉多少根头发";
 }
