@@ -13,7 +13,7 @@ Format.prototype.func2 = function(data){	// compress
     return data.replace(/([\r\n]+|\/\*.*?\*\/)/g, '').replace(/[\t\s]+/g, ' ').replace(/\s*([=,:;<>\{\}])\s*/g, '$1');
 };
 Format.prototype.loadDemo = function(){
-	return (document.getElementById(this.type) || {}).outerHTML;
+	return (document.getElementById(this.type) || {}).innerHTML;
 };
 Format.regist = function(name, func1, func2){
 	var instant = Format[name] = new Format(name);
@@ -38,6 +38,18 @@ Format.regist('jade', function(html, cb){
 	});
 });
 Format.regist('html', style_html);
+Format.regist('sensors', function(str, cb) {
+	if (!str) {
+		return;
+	}
+	str = decodeURIComponent(escape(window.atob(decodeURIComponent(str))));
+	try {
+		str = JSON.stringify(JSON.parse(str), null, 4);
+	} catch (e) {
+		str = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
+	}
+	cb(str);
+});
 Format.regist('markdown', toMarkdown, new Markdown.Converter().makeHtml);
 
 }();

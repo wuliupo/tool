@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html id="html">
+<html id="html" lang="zh-CN">
 <head>
 <title>Code format</title>
 <style type="text/css" id="css">
-/* here is css code */
 body{line-height:24px;font-size:14px;color:#333;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
 h1{padding-bottom:9px;border-bottom:1px solid #ddd;}
 a{color:#428bca;text-decoration:none;}
 .hide{display:none;}
-.container{margin:0 auto;width:calc(100% - 10px);max-width:1000px;}
-.controls{margin-bottom:10px;float:right;}
+.container{margin:0 auto;width:calc(100% - 10px);max-width:1200px;}
+.controls{margin-top: -62px;float:right;}
 .nav{padding-left:0;list-style:none;border-bottom:1px solid #ddd;}
 .nav:after{display:block;content:"";width:0;height:0;clear:both;}
 .nav li{float:left;margin-bottom:-1px;}
@@ -27,10 +26,9 @@ a{color:#428bca;text-decoration:none;}
 </style>
 </head>
 <body>
-<!-- Juest Test -->
 <div class="container" id="jade">
 	<h1>Code format</h1>
-	<ul class="nav" id="markdown">
+	<ul class="nav">
 		<li><a href func1="Format" func2="Compress">HTML</a></li>
 		<li><a href func1="Format" func2="Compress">JS</a></li>
 		<li><a href func1="Format" func2="Compress">CSS</a></li>
@@ -41,6 +39,7 @@ a{color:#428bca;text-decoration:none;}
 		<li><a href func1="Format" func2="Compress">SQL</a></li>
 		<li><a href func1="to Markdown" func2="to HTML">Markdown</a></li>
 		<li><a href func1="to Jade" func2="to HTML">Jade</a></li>
+		<li><a href func1="from sensor" func2="to JSON">Sensors</a></li>
 	</ul>
 	<div class="pull-right controls">
 		<button type="button" class="btn btn-info" func="loadDemo">Demo</button>
@@ -58,9 +57,11 @@ a{color:#428bca;text-decoration:none;}
 		<li><a href="http://tool.lu/php" target="_blank">http://tool.lu/php</a></li>
 		<li><a href="http://www.cnblogs.com/dolphinX/p/3486214.html" target="_blank">Regexp</a></li>
 		<li><a href="http://html2jade.org" target="_blank">HTML 2 Jade</a></li>
+		<li><a href="https://www.sensorsdata.cn/tools/decode.html" target="_blank">神策解码</a></li>
 	</ul>
 </div>
 <div class="hide">
+<span id="sensors">eyJkaXN0aW5jdF9pZCI6IjE3MjY1IiwibGliIjp7IiRsaWIiOiJqcyIsIiRsaWJfbWV0aG9kIjoiY29kZSIsIiRsaWJfdmVyc2lvbiI6IjEuMTQuMTIifSwicHJvcGVydGllcyI6eyIkc2NyZWVuX2hlaWdodCI6OTAwLCIkc2NyZWVuX3dpZHRoIjoxNDQwLCIkbGliIjoianMiLCIkbGliX3ZlcnNpb24iOiIxLjE0LjEyIiwiJGxhdGVzdF90cmFmZmljX3NvdXJjZV90eXBlIjoi55u05o6l5rWB6YePIiwiJGxhdGVzdF9zZWFyY2hfa2V5d29yZCI6IuacquWPluWIsOWAvF/nm7TmjqXmiZPlvIAiLCIkbGF0ZXN0X3JlZmVycmVyIjoiIiwiJGxhdGVzdF9sYW5kaW5nX3BhZ2UiOiJodHRwczovL3d3dy5xeHd6LmNvbS8iLCIkZGV2aWNlX2lkIjoiMTc1Nzg5ZGI1YTkzYzQtMDNmZjY5OWM2NDNmOWUtMWU0YzMyMWYtMTI5NjAwMC0xNzU3ODlkYjVhYTcyMSIsImN1cnJlbnRfdXJsIjoiaHR0cHM6Ly93d3cucXh3ei5jb20vIiwicmVmZXJyZXIiOiJodHRwczovL3Bhc3Nwb3J0LnF4d3ouY29tL2xvZ2luIiwicGxhdGZvcm1fdHlwZSI6IlBDIiwiJGVsZW1lbnRfdHlwZSI6ImJ1dHRvbiIsIiRlbGVtZW50X2NsYXNzX25hbWUiOiJpbmRleF9fY29udGFpbmVyLS1oMkRaZCIsIiRlbGVtZW50X2NvbnRlbnQiOiLlvq7kv6HmiavnoIHliIbkuqsiLCIkdXJsIjoiaHR0cHM6Ly93d3cucXh3ei5jb20vIiwiJHVybF9wYXRoIjoiLyIsIiR0aXRsZSI6IuWNg+Wvu+S9jee9rue9kS3ml7bnqbrmmbrog70g5YWx5Yib5pWw5a2X5Lit5Zu9IiwiJHZpZXdwb3J0X3dpZHRoIjoxNDQwLCIkZWxlbWVudF9zZWxlY3RvciI6IiNyb290ID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDgpID4gZGl2Om50aC1vZi10eXBlKDEpID4gYTpudGgtb2YtdHlwZSgyKSA+IGJ1dHRvbjpudGgtb2YtdHlwZSgxKSIsIiRpc19maXJzdF9kYXkiOmZhbHNlLCIkbGF0ZXN0X3JlZmVycmVyX2hvc3QiOiIifSwidHlwZSI6InRyYWNrIiwiZXZlbnQiOiIkV2ViQ2xpY2siLCJfdHJhY2tfaWQiOjgyMTQyNTQ4MH0=</span>
 <pre id="markdown">
 # 这个是一级标题
 
@@ -73,18 +74,16 @@ a{color:#428bca;text-decoration:none;}
 > ## This is an H2 in a [blockquote](http://pauli.cn)
 </pre>
 
-<script type="text/javascript" src="./cssbeautify.js"></script>
-<script type="text/javascript" src="./jsbeautify.js"></script>
-<script type="text/javascript" src="./beautify-html.js"></script>
-<script type="text/javascript" src="./Markdown.Converter.js"></script>
-<script type="text/javascript" src="./he.js"></script>
-<script type="text/javascript" src="./html2markdown.js"></script>
-<script type="text/javascript" src="./html2jade.js"></script>
-<script type="text/javascript" src="./marked.js"></script>
-<script type="text/javascript" src="./format.js"></script>
+<script src="./cssbeautify.js"></script>
+<script src="./jsbeautify.js"></script>
+<script src="./beautify-html.js"></script>
+<script src="./Markdown.Converter.js"></script>
+<script src="./he.js"></script>
+<script src="./html2markdown.js"></script>
+<script src="./html2jade.js"></script>
+<script src="./format.js"></script>
 <script src="html2markdown.js"></script>
-<script type="text/javascript" id="js">
-// here is js code
+<script id="js">
 ~function(){
 	var format, textarea = document.body.querySelector('.form-control'), tabs = query2('.nav a'), btns = query2('.controls button');
     tabs.map(function(a){
