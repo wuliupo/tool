@@ -42,9 +42,20 @@ Format.regist('sensors', function(str, cb) {
 	if (!str) {
 		return;
 	}
-	str = decodeURIComponent(escape(window.atob(decodeURIComponent(str))));
 	try {
-		str = JSON.stringify(JSON.parse(str), null, 4);
+		str = JSON.stringify(JSON.parse(decodeURIComponent(escape(window.atob(decodeURIComponent(str))))), null, 4);
+	} catch (e) {
+		str = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
+	}
+	cb(str);
+}, function(str, cb) {
+	if (!str) {
+		return;
+	}
+	try {
+		str = JSON.parse(str);
+		str = window.btoa(unescape(encodeURIComponent(JSON.stringify(str))));
+		// 传递给 url query params 时，需要再 encodeURIComponent 一次
 	} catch (e) {
 		str = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
 	}
