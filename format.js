@@ -37,7 +37,9 @@ Format.regist('jade', function(html, cb){
 		cb(jade);
 	});
 });
+
 Format.regist('html', style_html);
+
 Format.regist('sensors', function(str, cb) {
 	if (!str) {
 		return;
@@ -61,6 +63,31 @@ Format.regist('sensors', function(str, cb) {
 	}
 	cb(str);
 });
+
+Format.regist('foxer', function(str, cb) {
+	if (!str) {
+		return;
+	}
+	try {
+		str = JSON.stringify(JSON.parse(decodeURIComponent(unescape(atob(decodeURIComponent(str))))), null, 4);
+	} catch (e) {
+		str = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
+	}
+	cb(str);
+}, function(str, cb) {
+	if (!str) {
+		return;
+	}
+	try {
+		str = JSON.parse(str);
+		str = encodeURIComponent(window.btoa(escape(encodeURIComponent(JSON.stringify(str)))));
+		// 传递给 url query params 时，需要再 encodeURIComponent 一次
+	} catch (e) {
+		str = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
+	}
+	cb(str);
+});
+
 Format.regist('markdown', toMarkdown, new Markdown.Converter().makeHtml);
 
 }();
