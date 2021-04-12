@@ -88,6 +88,34 @@ Format.regist('foxer', function(str, cb) {
 	cb(str);
 });
 
+Format.regist('interface', function(str, cb) {
+	if (!str) {
+		return;
+	}
+	var result = 'interface xxx {';
+	try {
+		var obj = JSON.parse(str);
+		Object.keys(obj).forEach(function(key) {
+			var type = typeof obj[key];
+			if (type === 'function') {
+				type = 'Function';
+			} else if (type === 'object') {
+				type = 'any';
+			}
+			result += '\n\t' + key + ': ' + type + ';';
+		});
+		str = result + '\n}';
+	} catch (e) {
+		str = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
+	}
+	cb(str);
+}, function(str, cb) {
+	if (!str) {
+		return;
+	}
+	cb(str);
+});
+
 Format.regist('markdown', toMarkdown, new Markdown.Converter().makeHtml);
 
 }();

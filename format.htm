@@ -41,6 +41,8 @@ a{color:#428bca;text-decoration:none;}
 		<li><a href func1="to Jade" func2="to HTML">Jade</a></li>
 		<li><a href func1="from string" func2="to JSON">Sensors</a></li>
 		<li><a href func1="from string" func2="to JSON">Foxer</a></li>
+		<li><a href func1="from string" func2="to JSON">Foxer</a></li>
+		<li><a href func1="from object" func2="to Interface">Interface</a></li>
 	</ul>
 	<div class="pull-right controls">
 		<button type="button" class="btn btn-info" func="loadDemo">Demo</button>
@@ -64,6 +66,35 @@ a{color:#428bca;text-decoration:none;}
 <div class="hide">
 <span id="sensors">eyJkaXN0aW5jdF9pZCI6IjE3MjY1IiwibGliIjp7IiRsaWIiOiJqcyIsIiRsaWJfbWV0aG9kIjoiY29kZSIsIiRsaWJfdmVyc2lvbiI6IjEuMTQuMTIifSwicHJvcGVydGllcyI6eyIkc2NyZWVuX2hlaWdodCI6OTAwLCIkc2NyZWVuX3dpZHRoIjoxNDQwLCIkbGliIjoianMiLCIkbGliX3ZlcnNpb24iOiIxLjE0LjEyIiwiJGxhdGVzdF90cmFmZmljX3NvdXJjZV90eXBlIjoi55u05o6l5rWB6YePIiwiJGxhdGVzdF9zZWFyY2hfa2V5d29yZCI6IuacquWPluWIsOWAvF/nm7TmjqXmiZPlvIAiLCIkbGF0ZXN0X3JlZmVycmVyIjoiIiwiJGxhdGVzdF9sYW5kaW5nX3BhZ2UiOiJodHRwczovL3d3dy5xeHd6LmNvbS8iLCIkZGV2aWNlX2lkIjoiMTc1Nzg5ZGI1YTkzYzQtMDNmZjY5OWM2NDNmOWUtMWU0YzMyMWYtMTI5NjAwMC0xNzU3ODlkYjVhYTcyMSIsImN1cnJlbnRfdXJsIjoiaHR0cHM6Ly93d3cucXh3ei5jb20vIiwicmVmZXJyZXIiOiJodHRwczovL3Bhc3Nwb3J0LnF4d3ouY29tL2xvZ2luIiwicGxhdGZvcm1fdHlwZSI6IlBDIiwiJGVsZW1lbnRfdHlwZSI6ImJ1dHRvbiIsIiRlbGVtZW50X2NsYXNzX25hbWUiOiJpbmRleF9fY29udGFpbmVyLS1oMkRaZCIsIiRlbGVtZW50X2NvbnRlbnQiOiLlvq7kv6HmiavnoIHliIbkuqsiLCIkdXJsIjoiaHR0cHM6Ly93d3cucXh3ei5jb20vIiwiJHVybF9wYXRoIjoiLyIsIiR0aXRsZSI6IuWNg+Wvu+S9jee9rue9kS3ml7bnqbrmmbrog70g5YWx5Yib5pWw5a2X5Lit5Zu9IiwiJHZpZXdwb3J0X3dpZHRoIjoxNDQwLCIkZWxlbWVudF9zZWxlY3RvciI6IiNyb290ID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDgpID4gZGl2Om50aC1vZi10eXBlKDEpID4gYTpudGgtb2YtdHlwZSgyKSA+IGJ1dHRvbjpudGgtb2YtdHlwZSgxKSIsIiRpc19maXJzdF9kYXkiOmZhbHNlLCIkbGF0ZXN0X3JlZmVycmVyX2hvc3QiOiIifSwidHlwZSI6InRyYWNrIiwiZXZlbnQiOiIkV2ViQ2xpY2siLCJfdHJhY2tfaWQiOjgyMTQyNTQ4MH0=</span>
 <span id="foxer">JTI1N0IlMjUyMmV2ZW50JTI1MjIlMjUzQSUyNTIyJTI1MjRXZWJDbGljayUyNTIyJTI1MkMlMjUyMnBhcmFtcyUyNTIyJTI1M0ElMjU3QiUyNTIyc2l0ZSUyNTIyJTI1M0ElMjUyMjEwMCUyNTIyJTI1MkMlMjUyMnBhZ2UlMjUyMiUyNTNBJTI1MjJpbmRleCUyNTIyJTI1MkMlMjUyMnJlZiUyNTIyJTI1M0ElMjUyMjAlMjUyMiUyNTJDJTI1MjJibG9jayUyNTIyJTI1M0ElMjUyMnNlcnZpY2VzMSUyNTIyJTI1MkMlMjUyMmFkZHIlMjUyMiUyNTNBJTI1MjI0JTI1MjIlMjUyQyUyNTIybG9nJTI1MjIlMjUzQSUyNTIyb2llNTlvMHhubyUyNTIyJTI1MkMlMjUyMiUyNTI0ZWxlbWVudF90eXBlJTI1MjIlMjUzQSUyNTIyYSUyNTIyJTI1MkMlMjUyMiUyNTI0cmVmZXJyZXIlMjUyMiUyNTNBJTI1MjIlMjUyMiUyNTJDJTI1MjIlMjUyNHVybCUyNTIyJTI1M0ElMjUyMmh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LnF4d3ouY29tJTI1MkYlMjUyMiUyNTJDJTI1MjIlMjUyNGVsZW1lbnRfdGFyZ2V0X3VyJTI1MjIlMjUzQSUyNTIyaHR0cHMlMjUzQSUyNTJGJTI1MkZtYWxsLnF4d3ouY29tJTI1MkZtYXJrZXQlMjUyRnNlcnZpY2VzJTI1MkZGaW5kQ00lMjUzRnNwbSUyNTNEMTAwLmluZGV4LnNlcnZpY2VzMS40LjAub2llNTlvMHhubyUyNTIyJTI1MkMlMjUyMiUyNTI0ZWxlbWVudF9jb250ZW50JTI1MjIlMjUzQSUyNTIyJTI1RTclMjVBQiUyNThCJTI1RTUlMjU4RCUyNUIzJTI1RTglMjVCNCUyNUFEJTI1RTQlMjVCOSUyNUIwJTI1MjIlMjU3RCUyNTdE</span>
+<span id="interface">
+{
+	"userId": 3,
+	"userName": "qiye221",
+	"realName": "杭州瓦屋科技有限公司(旧2)",
+	"idNum": null,
+	"companyName": "杭州瓦屋科技有限公司(旧2)",
+	"businessLicenceNum": "234523523534546678",
+	"mobile": "13711111111",
+	"mobileVerify": 1,
+	"email": "1323@126.com",
+	"emailVerify": 1,
+	"userType": 1,
+	"auditStatus": 3,
+	"auditSubmitTime": "2017-03-07 18:23:18",
+	"auditTime": "2020-10-20 14:24:07",
+	"status": 0,
+	"source": null,
+	"channel": null,
+	"isDistributor": 1,
+	"distributorStatus": 3,
+	"gmtCreate": "2014-10-14 10:45:33",
+	"lastLoginTime": "2021-01-18 13:43:35",
+	"loginTimes": 1982,
+	"roleCode": null,
+	"roleGmtCreate": null,
+	"roleStatus": null
+}
+</span>
 <pre id="markdown">
 # 这个是一级标题
 
