@@ -17,8 +17,8 @@
     <hr>
     <form action="#" method="get" name="form1" id="form1">
         <!--显示浏览器窗口的实际尺寸-->
-        浏览器窗口 的 实际高度: <input type="text" name="availHeight" size="4"><br>
-        浏览器窗口 的 实际宽度: <input type="text" name="availWidth" size="4"><br>
+        浏览器窗口 的 实际高度: <input type="text" name="availHeight" size="4"> window.innerHeight <br>
+        浏览器窗口 的 实际宽度: <input type="text" name="availWidth" size="4"> window.innerWidth<br>
     </form>
 
     <p>HTML精确定位: scrollLeft, scrollWidth, clientWidth, offsetWidth</p>
@@ -66,16 +66,16 @@
         <li>屏幕可用工作区宽度： window.screen.availWidth</li>
     </ul>
     <p>－－－－－－－－－－－－－－－－－－－</p>
-    <p>技术要点</p>
+    <p>技术要点：</p>
     <ul>
-        <li>本节代码主要使用了Document对象关于窗口的一些属性，这些属性的主要功能和用法如下。</li>
+        <li>本节代码主要使用了document对象关于窗口的一些属性，这些属性的主要功能和用法如下。</li>
         <li>要得到窗口的尺寸，对于不同的浏览器，需要使用不同的属性和方法：</li>
-        <li>若要检测窗口的真实尺寸，在Netscape下需要使用Window的属性；</li>
-        <li>在IE下需要深入Document内部对body进行检测；</li>
+        <li>若要检测窗口的真实尺寸，在Netscape下需要使用window的属性；</li>
+        <li>在IE下需要深入document内部对body进行检测；</li>
         <li>在DOM环境下，若要得到窗口的尺寸，需要注意根元素的尺寸，而不是元素。</li>
-        <li>Window对象的innerWidth属性包含当前窗口的内部宽度。Window对象的innerHeight属性包含当前窗口的内部高度。</li>
-        <li>Document对象的body属性对应HTML文档的标签。Document对象的documentElement属性则表示HTML文档的根节点。</li>
-        <li>document.body.clientHeight表示HTML文档所在窗口的当前高度。document.body.clientWidth表示HTML文档所在窗口的当前宽度。</li>
+        <li>window.innerWidth 属性包含当前窗口的内部宽度。window.innerHeight 属性包含当前窗口的内部高度。</li>
+        <li>document.body 对应HTML文档的标签。document.documentElement 表示HTML文档的根节点。</li>
+        <li>document.body.clientHeight 表示HTML文档所在窗口的当前高度。document.body.clientWidth 表示HTML文档所在窗口的当前宽度。</li>
     </ul>
 
     <script type="text/javascript">
@@ -93,7 +93,7 @@
                 winHeight = window.innerHeight;
             else if ((document.body) && (document.body.clientHeight))
                 winHeight = document.body.clientHeight;
-            //通过深入Document内部对body进行检测，获取窗口大小
+            //通过深入document内部对body进行检测，获取窗口大小
             if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
                 winHeight = document.documentElement.clientHeight;
                 winWidth = document.documentElement.clientWidth;
@@ -107,5 +107,6 @@
         window.onresize = findDimensions;
     </script>
 </div>
+<script src="https://hm.baidu.com/hm.js?f1d0cf2c0b66b9dc70ded52b9629fa85" async></script>
 </body>
 </html>
