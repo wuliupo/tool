@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九大名关</title>
+<style>
+*, *:after, *:before {margin: 0; padding: 0; box-sizing: border-box;}
+.container {width: 100vw;height: 100vh;}
+</style>
+</head>
+<body>
+<div class="container" id="container"></div>
+<script src="https://webapi.amap.com/maps?v=1.4.15&plugin=AMap.Driving,AMap.DistrictSearch,AMap.Autocomplete,AMap.Geolocation,AMap.ToolBar,AMap.PlaceSearch&key=6019be964137e45e8588e0adb343090b">
+</script>
+<script>
+!(function(){
+    // https://api.map.baidu.com/lbsapi/getpoint/index.html
+    // 山海关|潼关|嘉峪关|居庸关|友谊关|雁门关|紫荆关|娘子关|武胜关
+    var points = [
+        { lng: 119.767232, lat: 40.016497, name: '秦皇岛市山海关', },
+        { lng: 110.302745, lat: 34.609055, name: '渭南市潼关', },
+        { lng: 98.226869, lat: 39.806652, name: '嘉峪关', },
+        { lng: 116.079159, lat: 40.296972, name: '昌平区居庸关', },
+        { lng: 106.72011, lat: 21.98517, name: '凭祥市友谊关', },
+        { lng: 112.889451, lat: 39.189975, name: '忻州市雁门关', },
+        { lng: 115.181392, lat: 39.434148, name: '保定市紫荆关', },
+        { lng: 113.891149, lat: 37.973474, name: '阳泉市娘子关', },
+        { lng: 114.070021, lat: 31.603738, name: '广水市武胜关', },
+    ];
+    var map = new AMap.Map('container', {
+        center: [111.886593, 34.479273],
+        zoom: 5,
+        resizeEnable: true,
+        // mapStyle: 'blue_night',
+    });
+
+    var geolocation = new AMap.Geolocation({
+        timeout: 10000, // 超过10秒后停止定位，默认：无穷大
+        showButton: false, // 显示定位按钮，默认：true
+        panToLocation: false, // 定位成功后将定位到的位置作为地图中心点，默认：true
+    });
+    // 地图上显示当前位置的点
+    geolocation.getCurrentPosition();
+    map.addControl(geolocation);
+    var markers = [];
+    for (var i = 0; i < points.length; i++) {
+        const place = points[i];
+        // https://lbs.amap.com/api/javascript-api/reference/overlay
+        markers.push(new AMap.Marker({
+            position: new AMap.LngLat(place.lng, place.lat),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+            title: place.name,
+            // content: place.name,
+            bubble: true,
+            animation: 'AMAP_ANIMATION_DROP', // AMAP_ANIMATION_BOUNCE
+            clickable: true,
+            label: { content: place.name, offset: 0, direction: 'bottom' },
+        }));
+    }
+    map.add(markers);
+
+    map.addControl(new AMap.ToolBar({ visible: true }));
+    map.on('complete', function () {
+        console.log('map complete');
+    });
+    map.on('error', function (err) {
+        console.log(err);
+    });
+    window.mapInstance = map;
+})();
+</script>
+</body>
+</html>
