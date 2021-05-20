@@ -28,6 +28,10 @@
         { lng: 115.181392, lat: 39.434148, name: '保定市紫荆关', },
         { lng: 113.891149, lat: 37.973474, name: '阳泉市娘子关', },
         { lng: 114.070021, lat: 31.603738, name: '广水市武胜关', },
+        { lng: 93.871713, lat: 40.361197, name: '*敦煌市玉门关', },
+        { lng: 94.060858, lat: 39.940913, name: '*敦煌市阳关', },
+        { lng: 112.319954, lat: 40.254746, name: '*呼和浩特市杀虎口', },
+        { lng: 113.980366, lat: 39.366709, name: '*大同市平型关', },
     ];
     var map = new AMap.Map('container', {
         center: [111.886593, 34.479273],
@@ -48,7 +52,8 @@
     for (var i = 0; i < points.length; i++) {
         const place = points[i];
         // https://lbs.amap.com/api/javascript-api/reference/overlay
-        markers.push(new AMap.Marker({
+        // http://map.jiqrxx.com/jingweidu/
+        var marker = new AMap.Marker({
             position: new AMap.LngLat(place.lng, place.lat),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
             title: place.name,
             // content: place.name,
@@ -56,13 +61,24 @@
             animation: 'AMAP_ANIMATION_DROP', // AMAP_ANIMATION_BOUNCE
             clickable: true,
             label: { content: place.name, offset: 0, direction: 'bottom' },
-        }));
+        });
+        marker.name = place.name;
+        marker.on('click', function(e){
+            this.markOnAMAP({
+                name: this.name,
+                position: this.getPosition(),
+            })
+        })
+        markers.push(marker);
     }
     map.add(markers);
 
     map.addControl(new AMap.ToolBar({ visible: true }));
     map.on('complete', function () {
         console.log('map complete');
+        setTimeout(function() {
+            map.setFitView();
+        }, 100);
     });
     map.on('error', function (err) {
         console.log(err);
