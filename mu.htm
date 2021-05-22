@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>医学院-军医大学</title>
+<style>
+*, *:after, *:before {margin: 0; padding: 0; box-sizing: border-box;}
+.container {width: 100vw;height: 100vh;}
+</style>
+</head>
+<body>
+<div class="container" id="container"></div>
+<script src="https://webapi.amap.com/maps?v=1.4.15&plugin=AMap.Driving,AMap.DistrictSearch,AMap.Autocomplete,AMap.Geolocation,AMap.ToolBar,AMap.PlaceSearch&key=6019be964137e45e8588e0adb343090b">
+</script>
+<script>
+!(function(){
+    // https://api.map.baidu.com/lbsapi/getpoint/index.html
+    var points = [
+        { lng: 113.341254, lat: 23.193292, name: '南方医科大学（第一军医大学/广州）', target: '//www.fimmu.edu.cn', },
+        { lng: 121.535822, lat: 31.311991, name: '海军医科大学（第二军医大学/上海）', target: '//www.smmu.edu.cn', },
+        { lng: 106.458701, lat: 29.543104, name: '陆军医科大学（第三军医大学/重庆）', target: '//www.tmmu.edu.cn', },
+        { lng: 108.992869, lat: 34.278703, name: '空军医科大学（第四军医大学/西安）', target: '//www.fmmu.edu.cn', },
+        { lng: 123.418857, lat: 41.79913, name: '中国医科大学（沈阳）', target: '//www.cmu.edu.cn', },
+        { lng: 116.423658, lat: 39.916983, name: '中国协和医科大学（清华大学医学部/北京）', target: '//www.pumc.edu.cn', },
+        { lng: 116.365211, lat: 39.990025, name: '北京医科大学（北京大学(医学部)/北京）', target: '//www.bjmu.edu.cn', },
+        { lng: 116.359737, lat: 39.870847, name: '首都医科大学（北京）', target: '//www.ccmu.edu.cn', },
+        { lng: 121.4584, lat: 31.205552, name: '上海医科大学（复旦大学医学院/上海）', target: '//shmc.fudan.edu.cn', },
+        { lng: 121.475738, lat: 31.218998, name: '上海第二医科大学（上海交通大学医学院/上海）', target: '//www.shsmu.edu.cn', },
+        { lng: 121.39903, lat: 31.32144, name: '上海大学医学院（上海）', target: '//medicine.shu.edu.cn', },
+        { lng: 113.652808, lat: 34.75538, name: '河南医科大学（郑州大学医学院/郑州）', target: '//www7.zzu.edu.cn/mczzu/', },
+        { lng: 114.313166, lat: 34.827368, name: '河南大学医学院（开封）', target: '//mmed.henu.edu.cn', },
+    ];
+    var map = new AMap.Map('container', {
+        center: [111.886593, 34.479273],
+        zoom: 5,
+        resizeEnable: true,
+        // mapStyle: 'blue_night',
+    });
+
+    var geolocation = new AMap.Geolocation({
+        timeout: 10000, // 超过10秒后停止定位，默认：无穷大
+        showButton: false, // 显示定位按钮，默认：true
+        panToLocation: false, // 定位成功后将定位到的位置作为地图中心点，默认：true
+    });
+    // 地图上显示当前位置的点
+    geolocation.getCurrentPosition();
+    map.addControl(geolocation);
+    var markers = [];
+    for (var i = 0; i < points.length; i++) {
+        const place = points[i];
+        // https://lbs.amap.com/api/javascript-api/reference/overlay
+        // http://map.jiqrxx.com/jingweidu/
+        var marker = new AMap.Marker({
+            position: new AMap.LngLat(place.lng, place.lat),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+            title: place.name,
+            // content: place.name,
+            bubble: true,
+            animation: 'AMAP_ANIMATION_DROP', // AMAP_ANIMATION_BOUNCE
+            clickable: true,
+            label: { content: place.name, offset: 0, direction: 'bottom' },
+        });
+        marker.name = place.name;
+        marker.on('click', function(e){
+            this.markOnAMAP({
+                name: this.name,
+                position: this.getPosition(),
+            })
+        })
+        markers.push(marker);
+    }
+    map.add(markers);
+
+    map.addControl(new AMap.ToolBar({ visible: true }));
+    map.on('complete', function () {
+        console.log('map complete');
+        setTimeout(function() {
+            map.setFitView();
+        }, 100);
+    });
+    map.on('error', function (err) {
+        console.log(err);
+    });
+    window.mapInstance = map;
+})();
+</script>
+<script src="https://hm.baidu.com/hm.js?f1d0cf2c0b66b9dc70ded52b9629fa85" async></script>
+</body>
+</html>
