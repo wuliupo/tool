@@ -116,6 +116,18 @@ Format.regist('interface', function(str, cb) {
 	cb(str);
 });
 
+Format.regist('unicode', function(str, cb) {
+	if (!str) {
+		return;
+	}
+	cb(unescape(str.replace(/\\u/g, '%u')));
+}, function(str, cb) {
+	if (!str) {
+		return;
+	}
+	cb(escape(str).replace(/%u/g, '\\u'));
+});
+
 Format.regist('markdown', toMarkdown, new Markdown.Converter().makeHtml);
 
 }();
