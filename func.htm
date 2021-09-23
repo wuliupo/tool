@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方程式-曲线</title>
+</head>
+<body>
+<h1>方程式</h1>
+<textarea id="func" cols="30" rows="10" style="padding: 2px 6px; width: 292px;" title="请输入方程式" placeholder="请输入方程式">x ** 2 + 1 / x</textarea>
+<div></div>
+<input type="range" id="range" min="0" max="100" step="1" value="10" style="width: 300px;" title="请调整作图区间" placeholder="请调整作图区间" />
+<button onclick="genLine()">作图</button>
+<div id="lineGraph" style="width: 80vw; max-width: 800vw; min-width: 300px; height: 500px;"></div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.0/dist/echarts.min.js"></script>
+<script>
+var chartDom = document.getElementById('lineGraph');
+var myChart = echarts.init(chartDom);
+function genLine() {
+    var range = Math.max(+document.getElementById('range').value, 0.01);
+    var dataX = [];
+    var dataY = [];
+    for (var i = 0.01; i < 21; i++) {
+        var x = Math.round(range * i / 20 * 100) / 100;
+        dataX.push(x);
+        dataY.push(eval(document.getElementById('func').value));
+    }
+    var option = {
+        xAxis: {
+            type: 'category',
+            data: dataX
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: dataY,
+                type: 'line',
+                smooth: true
+            }
+        ]
+    };
+    myChart.setOption(option);
+}
+genLine();
+</script>
+</body>
+</html>
