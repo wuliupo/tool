@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock.js</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { line-height: 30px; max-width: 1200px; margin: 20px auto; padding: 20px; }
+ul { margin-left: 30px; }
+h1, h2, h3 { margin: 20px 0 10px; }
+table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    border-radius: 2px 2px 0px 0px;
+    border-spacing: 0px;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.5715;
+    font-feature-settings: "tnum";
+    position: relative;
+    font-size: 14px;
+    margin: 20px 0;
+    padding: 0px;
+    font-variant: tabular-nums;
+    list-style: none;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 2px;
+}
+table th, table td { 
+    border: 1px solid rgb(240, 240, 240); 
+    transition: background 0.3s ease 0s; 
+    padding: 4px 10px;
+    max-width: 300px;
+    overflow: auto;
+}
+    </style>
+</head>
+<body>
+    <h1>Mock.js</h1>
+    <p>Mock.js 是一款模拟数据生成器，旨在帮助前端攻城师独立于后端进行开发，帮助编写单元测试。提供了以下模拟功能：</p>
+    <ul>
+        <li>根据数据模板生成模拟数据</li>
+        <li>模拟 Ajax 请求，生成并返回模拟数据</li>
+    </ul>
+    <h2>常用链接</h2>
+    <ul>
+        <li>作者：<a href="https://github.com/nuysoft">高云云 mo(墨智) </a>（阿里巴巴）</li>
+        <li><a href="http://mockjs.com">mockjs.com/</a></li>
+        <li><a href="https://www.npmjs.com/package/mockjs">www.npmjs.com/package/mockjs</a></li>
+        <li><a href="https://github.com/nuysoft/Mock">github.com/nuysoft/Mock</a></li>
+        <li><a href="https://www.oschina.net/p/mockjs-lite">mockjs-lite</a></li>
+        <li><a href="http://www.richyli.com/tool/loremipsum/">www.richyli.com/tool/loremipsum/</a></li>
+        <li><a href="https://www.jianshu.com/p/49ae671892d1">你知道 lorem ipsum 是什么吗？</a>Lorem ipsum是指一篇常用于排版设计领域的拉丁文文章，主要的目的为测试文章或文字在不同字型、版型下看起来的效果。</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>分类</th>
+                <th>函数</th>
+                <th>表达式</th>
+                <th>结果</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>综合</td>
+                <td>Mock.mock</td>
+                <td>
+                    <pre>
+Mock.mock({
+    'list|1-10': [{    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+        'id|+1': 1     // 属性 id 是一个自增数，起始值为 1，每次增 1
+    }]
+})</pre>
+                </td>
+                <td><pre>
+{
+    list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]
+}</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Mock.Random</td>
+                <td>Mock.Random.email</td>
+                <td><pre>Random.email()
+Mock.mock('@email')
+Mock.mock( { email: '@email' } )</pre></td>
+                <td><pre>"n.clark@miller.io"
+"y.lee@lewis.org"
+{ email: "v.lewis@hall.gov" }</pre></td>
+            </tr>
+            <tr>
+                <td>Basic</td>
+                <td>boolean, natural, integer, float, character, string, range, date, time, datetime, now</td>
+                <td><pre>Random.boolean()
+Random.boolean(1, 9, true) // min, max, current
+Random.bool()
+Random.bool(1, 9, false)
+/*****************/
+Random.natural()
+Random.natural(10000) // min
+Random.natural(60, 100) // min, max
+/*****************/
+Random.integer()
+Random.integer(10000) // min
+Random.integer(60,100) // min, max
+/*****************/
+Random.float()
+Random.float(0)
+Random.float(60, 100)
+Random.float(60, 100, 3)
+Random.float(60, 100, 3, 5) // ( min, max, dmin, dmax )
+/*****************/
+Random.character()
+Random.character('symbol')
+Random.character('aeiou') // lower/upper/number/symbol
+/*****************/
+Random.string( pool?, min?, max? )
+/*****************/
+Random.range( start?, stop, step? )</pre></td>
+                <td><pre>true
+false
+false
+true
+/*****************/
+1002794054057984
+71529071126209
+77
+/*****************/
+3815311811805184
+4303764511003750
+96
+/*****************/
+-1766114241544192.8
+556530504040448.25
+82.56779679549358
+61.718533677927894
+70.6849
+/*****************/
+P
+u
+&</pre></td>
+            </tr>
+            <tr>
+                <td>扩展</td>
+                <td>Random.extend</td>
+                <td><pre>Random.extend({
+    constellation: function(date) {
+        var constellations = ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座']
+        return this.pick(constellations)
+    }
+})
+Random.constellation()
+Mock.mock('@CONSTELLATION')
+Mock.mock({
+    constellation: '@CONSTELLATION'
+})
+</pre></td>
+                <td><pre>"水瓶座"
+"天蝎座"
+{ constellation: "射手座" }</pre></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://cdn.bootcdn.net/ajax/libs/Mock.js/1.0.1-beta3/mock-min.js"></script>
+</body>
+</html>
