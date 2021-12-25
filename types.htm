@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Generate types in TypeScript from JSON object</title>
+    <style>
+        div { margin: 20px; }
+        textarea { width: 600px; height: 400px; padding: 6px 10px; }
+    </style>
+</head>
+<body>
+<div><button type="button" onclick="generateTypes()">Generate</button></div>
+<div><textarea id="content" cols="30" rows="10" placeholder="JSON data"></textarea></div>
+<script>
+const content = document.getElementById('content');
+
+function getTypes(obj, space) {
+    space = space || '';
+    // "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function"
+    let type = typeof obj;
+    if (obj instanceof Array) {
+        type = obj.length ? getTypes(obj[0], '    ') + '[]' : '[]';
+    } else if (obj instanceof Date) {
+        type = 'Date';
+    } else if (obj instanceof Function) {
+        type = '() => null';
+    } else if (obj === null) {
+        type = 'null';
+    } else if (obj === undefined) {
+        type = 'undefined';
+    } else if (type === 'object') {
+        type = '{';
+        Object.keys(obj).forEach(key => {
+            type += '\n    ' + space + key + ': ' + getTypes(obj[key], '    ') + ';';
+        });
+        type += '\n' + space + '}';
+    }
+    return type;
+}
+
+function generateTypes() {
+    let json = content.value;
+    json = json && JSON.parse(json);
+    if (json) {
+        content.value = 'interface ITypes ' + getTypes(json);
+    } else {
+        alert('Please give a JSON string');
+    }
+}
+</script>
+</body>
+</html>
